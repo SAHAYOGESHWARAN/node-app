@@ -1,21 +1,26 @@
 const http = require('http');
 
-const todos =[
-    {id: 1, text: 'Todo One'},
-    {id: 2, text: 'Todo two'},
-    {id: 2, text: 'Todo three'},
-]
-
+const todos = [
+    { id: 1, text: 'Todo One' },
+    { id: 2, text: 'Todo Two' },
+    { id: 3, text: 'Todo Three' }
+];
 
 const server = http.createServer((req, res) => {
-    res.setHeader('content-type','application/json');
-    res.setHeader('x-Powered-by','node.js')
+    
+   res.writeHead(400,{
+    'content-Type': 'application/json',
+    'X-Powered-By': 'Node.js'
+   });
     res.end(
-        json.stringify({
-    success: true,
-    data: todos
-}));
+        JSON.stringify({
+            success: false,
+            error: 'add your email',
+            data: null
+        })
+    );
 });
+
 const PORT = 5000;
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
