@@ -7,16 +7,24 @@ const todos = [
 ];
 
 const server = http.createServer((req, res) => {
-    
-   res.writeHead(400,{
-    'content-Type': 'application/json',
-    'X-Powered-By': 'Node.js'
-   });
+    res.writeHead(200, {
+        'Content-Type': 'application/json',
+        'X-Powered-By': 'Node.js'
+    });
+
+    let body = [];
+
+    req.on('data', chunk => {
+        body.push(chunk);
+    }).on('end', () => {
+        body = Buffer.concat(body).toString();
+        console.log(body);
+    });
+
     res.end(
         JSON.stringify({
-            success: false,
-            error: 'add your email',
-            data: null
+            success: true,
+            data: todos
         })
     );
 });
